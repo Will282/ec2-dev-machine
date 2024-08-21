@@ -26,4 +26,4 @@ jobs:
         run: poetry install --with dev
 
       - name: Run pre-commmit
-        run: pre-commit run --all --verbose
+        run: poetry run pre-commit run --all --verbose
