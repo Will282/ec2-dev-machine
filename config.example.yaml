@@ -1,0 +1,39 @@
+# TODO: Add comments
+# TODO: Add extra validations
+
+stack_id: "my-stack"
+base_resource_name: "my-resource"
+
+ec2:
+  instance_type: "t4g.nano"
+  key_pair_name: "example-key-pair"
+  ebs_volume_size: 50
+  vpc_id: "vpc-123"
+  managed_policies:
+    - AWSCodeCommitPowerUser
+  custom_policy: {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListObjectsInBucket",
+            "Effect": "Allow",
+            "Action": ["s3:ListBucket"],
+            "Resource": ["arn:aws:s3:::example-bucket"]
+        },
+        {
+            "Sid": "AllObjectActions",
+            "Effect": "Allow",
+            "Action": "s3:*Object",
+            "Resource": ["arn:aws:s3:::example-bucket/*"]
+        }
+    ]
+  }
+
+user_data:
+  python_version: "3.10.14"
+  git_user_name: "John Smith"
+  git_user_email: "john@example.com"
+
+environment:
+  account: "012345678901"
+  region: us-east-1
