@@ -1,0 +1,224 @@
+{
+  "Metadata": {
+    "cdk_nag": {
+      "rules_to_suppress": [
+        {
+          "id": "AwsSolutions-IAM4",
+          "reason": "Using AWS Managed Policies is acceptable in this scenario."
+        },
+        {
+          "applies_to": [
+            "Action::s3:*",
+            "Action::s3:*Object",
+            {
+              "regex": "/^Resource::arn:aws:s3:::(.*)/(.*)$/g"
+            }
+          ],
+          "id": "AwsSolutions-IAM5",
+          "reason": "Allow use * permissions, specifically for S3."
+        },
+        {
+          "id": "AwsSolutions-EC29",
+          "reason": "Termination Protection not required."
+        },
+        {
+          "id": "AwsSolutions-EC28",
+          "reason": "Do not need detailed monitoring enabled."
+        }
+      ]
+    }
+  },
+  "Outputs": {
+    "InstanceId": {
+      "Value": {
+        "Ref": "myresourceinstance92FE2E72"
+      }
+    }
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>"
+    },
+    "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61arm64C96584B6F00A464EAD1953AFF4B05118Parameter": {
+      "Default": "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-arm64",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>"
+    }
+  },
+  "Resources": {
+    "myresourceinstance92FE2E72": {
+      "DependsOn": [
+        "myresourceinstancerole90179C3F"
+      ],
+      "Properties": {
+        "AvailabilityZone": "dummy1a",
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/xvda",
+            "Ebs": {
+              "Encrypted": true,
+              "VolumeSize": 50,
+              "VolumeType": "gp3"
+            }
+          }
+        ],
+        "IamInstanceProfile": {
+          "Ref": "myresourceinstanceInstanceProfileCF0A03D0"
+        },
+        "ImageId": {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61arm64C96584B6F00A464EAD1953AFF4B05118Parameter"
+        },
+        "InstanceType": "t4g.nano",
+        "KeyName": "example-key-pair",
+        "NetworkInterfaces": [
+          {
+            "AssociatePublicIpAddress": true,
+            "DeviceIndex": "0",
+            "GroupSet": [
+              {
+                "Fn::GetAtt": [
+                  "myresourcesg0EF25059",
+                  "GroupId"
+                ]
+              }
+            ],
+            "SubnetId": "s-12345"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "my-stack/my-resource-instance"
+          }
+        ],
+        "UserData": {
+          "Fn::Base64": "#!/bin/bash\nEC2_USER_HOME=/home/ec2-user\n\nyum install -y \\\n    autoconf automake binutils \\\n    bison flex git gcc gcc-c++ \\\n    libtool make patch zlib-devel \\\n    bzip2 bzip2-devel readline-devel \\\n    sqlite sqlite-devel openssl-devel \\\n    tk-devel libffi-devel xz-devel\n\n# Set up pyenv\ncurl https://pyenv.run | sudo -u ec2-user bash -c \"bash\"\ncat <<EOT >> $EC2_USER_HOME/.bashrc\n\n# pyenv init\nexport PYENV_ROOT=\"\\$HOME/.pyenv\"\n    [[ -d \\$PYENV_ROOT/bin ]] && export PATH=\"\\$PYENV_ROOT/bin:\\$PATH\"\neval \"\\$(pyenv init -)\"\nEOT\n\n# Install Python version with pyenv and configure git\nsudo -u ec2-user bash <<EOF\nsource ~/.bashrc\npyenv install 3.10.14\npyenv global 3.10.14\n\ngit config --global user.name \"John Smith\"\ngit config --global user.email \"john@example.com\"\nEOF"
+        }
+      },
+      "Type": "AWS::EC2::Instance"
+    },
+    "myresourceinstanceInstanceProfileCF0A03D0": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "myresourceinstancerole90179C3F"
+          }
+        ]
+      },
+      "Type": "AWS::IAM::InstanceProfile"
+    },
+    "myresourceinstancerole90179C3F": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+              ]
+            ]
+          },
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/AWSCodeCommitPowerUser"
+              ]
+            ]
+          }
+        ]
+      },
+      "Type": "AWS::IAM::Role"
+    },
+    "myresourcepolicyB12A76FC": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:ListBucket",
+              "Effect": "Allow",
+              "Resource": "arn:aws:s3:::example-bucket",
+              "Sid": "ListObjectsInBucket"
+            },
+            {
+              "Action": "s3:*Object",
+              "Effect": "Allow",
+              "Resource": "arn:aws:s3:::example-bucket/*",
+              "Sid": "AllObjectActions"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "myresourcepolicyB12A76FC",
+        "Roles": [
+          {
+            "Ref": "myresourceinstancerole90179C3F"
+          }
+        ]
+      },
+      "Type": "AWS::IAM::Policy"
+    },
+    "myresourcesg0EF25059": {
+      "Properties": {
+        "GroupDescription": "my-stack/my-resource-sg",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "VpcId": "vpc-12345"
+      },
+      "Type": "AWS::EC2::SecurityGroup"
+    }
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                  ],
+                  {
+                    "Ref": "BootstrapVersion"
+                  }
+                ]
+              }
+            ]
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+        }
+      ]
+    }
+  }
+}
