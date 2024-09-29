@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ec2-dev-machine"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Will Parr"]
 license = "MIT"
@@ -21,6 +21,8 @@ Jinja2 = "^3.1.4"
 pytest = "^8.0.0"
 pre-commit = "^3.8.0"
 ipython = "^8.26.0"
+syrupy = "^4.7.1"
+cdk-nag = "^2.28.195"
 
 [build-system]
 requires = ["poetry-core"]

@@ -3,6 +3,7 @@ from typing import Any, Optional
 from aws_cdk import CfnOutput, Stack
 from aws_cdk import aws_ec2 as ec2
 from aws_cdk import aws_iam as iam
+from cdk_nag import NagSuppressions
 from constructs import Construct
 from pydantic import BaseModel, Field
 
@@ -114,3 +115,33 @@ class EC2InstanceStack(Stack):
 
         # Output Instance ID
         CfnOutput(self, "InstanceId", value=self.instance.instance_id)
+
+        # cdk-nag supressions
+        NagSuppressions.add_stack_suppressions(
+            self,
+            suppressions=[
+                {
+                    "id": "AwsSolutions-IAM4",
+                    "reason": "Using AWS Managed Policies is acceptable in this scenario.",
+                },
+                {
+                    "id": "AwsSolutions-IAM5",
+                    "reason": "Allow use * permissions, specifically for S3.",
+                    "appliesTo": [
+                        "Action::s3:*",
+                        "Action::s3:*Object",
+                        {
+                            "regex": "/^Resource::arn:aws:s3:::(.*)/(.*)$/g",
+                        },
+                    ],
+                },
+                {
+                    "id": "AwsSolutions-EC29",
+                    "reason": "Termination Protection not required.",
+                },
+                {
+                    "id": "AwsSolutions-EC28",
+                    "reason": "Do not need detailed monitoring enabled.",
+                },
+            ],
+        )

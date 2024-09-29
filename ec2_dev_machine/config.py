@@ -2,12 +2,12 @@ from pathlib import Path
 from typing import Optional, Union
 
 import yaml
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ConfigBase(BaseModel):
-    class Config:
-        extra = "forbid"  # Forbids extra fields in the YAML config
+    # Forbids extra fields in the YAML config
+    model_config = ConfigDict(extra="forbid")
 
 
 class EC2Config(ConfigBase):
