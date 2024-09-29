@@ -25,5 +25,5 @@ jobs:
       - name: Install Project
         run: poetry install --with dev
 
-      - name: Run pre-commmit
+      - name: Run pre-commit
         run: poetry run pre-commit run --all --verbose
