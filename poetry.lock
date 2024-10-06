@@ -50,13 +50,13 @@ tests-mypy = ["mypy (>=1.11.1)", "pytest-mypy-plugins"]
 
 [[package]]
 name = "aws-cdk-asset-awscli-v1"
-version = "2.2.204"
+version = "2.2.205"
 description = "A library that contains the AWS CLI for use in Lambda Layers"
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "aws_cdk.asset_awscli_v1-2.2.204-py3-none-any.whl", hash = "sha256:767296f317196d0d98009bca550a968e248736c720cb902f5a49490364ae218d"},
-    {file = "aws_cdk_asset_awscli_v1-2.2.204.tar.gz", hash = "sha256:45c98a5e90306f7f49838161f04999f21e2eb94a10800fe7068192fcff8e84a8"},
+    {file = "aws_cdk.asset_awscli_v1-2.2.205-py3-none-any.whl", hash = "sha256:086d74baa99596446f279a1263e1451a79f52fc0eea122b1f38f57f5a08699f0"},
+    {file = "aws_cdk_asset_awscli_v1-2.2.205.tar.gz", hash = "sha256:037d0684472a34050c2e4438c76048b9049c2753523463e12dec9fd725a26363"},
 ]
 
 [package.dependencies]
@@ -114,13 +114,13 @@ typeguard = ">=2.13.3,<5.0.0"
 
 [[package]]
 name = "aws-cdk-lib"
-version = "2.160.0"
+version = "2.161.1"
 description = "Version 2 of the AWS Cloud Development Kit library"
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "aws_cdk_lib-2.160.0-py3-none-any.whl", hash = "sha256:c6775a7c5d02e4272147692a0560071f1bd232c1dc1bf74e84a69f7bdb418362"},
-    {file = "aws_cdk_lib-2.160.0.tar.gz", hash = "sha256:df6142440f9e2754344d9a8f240e0a467d9102261c46b9e133cd16fbdbcd8796"},
+    {file = "aws_cdk_lib-2.161.1-py3-none-any.whl", hash = "sha256:c7de930396b1b9f0f512a728a1b926c77c3cab28fbc11fd4f81819dd9563bfb3"},
+    {file = "aws_cdk_lib-2.161.1.tar.gz", hash = "sha256:e27a427bc6d95dd2eb0500b0de628a88ee587b212f999fa6efb7e9ab17980201"},
 ]
 
 [package.dependencies]
@@ -160,13 +160,13 @@ ujson = ["ujson (>=5.7.0)"]
 
 [[package]]
 name = "cdk-nag"
-version = "2.28.195"
+version = "2.28.196"
 description = "Check CDK v2 applications for best practices using a combination on available rule packs."
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "cdk_nag-2.28.195-py3-none-any.whl", hash = "sha256:6a33dbad938b66946f2d89a8a010a6e2b9cb42c8703aa3b4991b6ad572596b8a"},
-    {file = "cdk_nag-2.28.195.tar.gz", hash = "sha256:c96ead451197dde434451c5bfef2c63edd0c7e766dd4a39268d9a8b8632da612"},
+    {file = "cdk_nag-2.28.196-py3-none-any.whl", hash = "sha256:2d9c45cb61e72c2c2b8d2e692d6261fff59fc81626f2ac2e3f35ca4f184916f1"},
+    {file = "cdk_nag-2.28.196.tar.gz", hash = "sha256:67d0b96f621c084c98b1a1419b36ec571aafadfe150f1fdb91196c021cdb2336"},
 ]
 
 [package.dependencies]
@@ -326,13 +326,13 @@ files = [
 
 [[package]]
 name = "ipython"
-version = "8.27.0"
+version = "8.28.0"
 description = "IPython: Productive Interactive Computing"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "ipython-8.27.0-py3-none-any.whl", hash = "sha256:f68b3cb8bde357a5d7adc9598d57e22a45dfbea19eb6b98286fa3b288c9cd55c"},
-    {file = "ipython-8.27.0.tar.gz", hash = "sha256:0b99a2dc9f15fd68692e898e5568725c6d49c527d36a9fb5960ffbdeaa82ff7e"},
+    {file = "ipython-8.28.0-py3-none-any.whl", hash = "sha256:530ef1e7bb693724d3cdc37287c80b07ad9b25986c007a53aa1857272dac3f35"},
+    {file = "ipython-8.28.0.tar.gz", hash = "sha256:0d0d15ca1e01faeb868ef56bc7ee5a0de5bd66885735682e8a322ae289a13d1a"},
 ]
 
 [package.dependencies]
@@ -919,13 +919,13 @@ tests = ["cython", "littleutils", "pygments", "pytest", "typeguard"]
 
 [[package]]
 name = "syrupy"
-version = "4.7.1"
+version = "4.7.2"
 description = "Pytest Snapshot Test Utility"
 optional = false
 python-versions = ">=3.8.1"
 files = [
-    {file = "syrupy-4.7.1-py3-none-any.whl", hash = "sha256:be002267a512a4bedddfae2e026c93df1ea928ae10baadc09640516923376d41"},
-    {file = "syrupy-4.7.1.tar.gz", hash = "sha256:f9d4485f3f27d0e5df6ed299cac6fa32eb40a441915d988e82be5a4bdda335c8"},
+    {file = "syrupy-4.7.2-py3-none-any.whl", hash = "sha256:eae7ba6be5aed190237caa93be288e97ca1eec5ca58760e4818972a10c4acc64"},
+    {file = "syrupy-4.7.2.tar.gz", hash = "sha256:ea45e099f242de1bb53018c238f408a5bb6c82007bc687aefcbeaa0e1c2e935a"},
 ]
 
 [package.dependencies]
@@ -933,13 +933,13 @@ pytest = ">=7.0.0,<9.0.0"
 
 [[package]]
 name = "tomli"
-version = "2.0.1"
+version = "2.0.2"
 description = "A lil' TOML parser"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
-    {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+    {file = "tomli-2.0.2-py3-none-any.whl", hash = "sha256:2ebe24485c53d303f690b0ec092806a085f07af5a5aa1464f3931eec36caaa38"},
+    {file = "tomli-2.0.2.tar.gz", hash = "sha256:d46d457a85337051c36524bc5349dd91b1877838e2979ac5ced3e710ed8a60ed"},
 ]
 
 [[package]]
@@ -1017,4 +1017,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "b6340419fe029b3d2999c42192cbdf00c1ee58027c9d0a893c7831211880562e"
+content-hash = "39b1590c81ce838a243257edaff8b3b3f2dfeb788d6506873f0d4b9758985848"
